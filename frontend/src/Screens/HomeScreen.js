@@ -1,16 +1,38 @@
 import './HomeScreen.css';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//Components
 import Product from '../components/Product'
 
+//Actions
+import { getProducts as listProducts } from '../redux/actions/productAction'
+
 function HomeScreen() {
+
+  const dispatch = useDispatch();
+  const getProducts = useSelector((state) => state.getProducts);
+  const { products, loading, error } = getProducts;
+  console.log(products, "Products")
+  useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch])
+
   return (
     <div>
       <h2 className="homescreen__title">Latest Products</h2>
       <div className="homescreen__products">
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+        {loading ? (<h2>Loading...</h2>) : error ? (
+          <h2>{error}</h2>) : (
+            products.map((product) => <Product
+              key={product._id}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              imageUrl={product.imageUrl}
+              productId={product._id}
+            />)
+          )}
       </div>
     </div>
   )
