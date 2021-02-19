@@ -6,12 +6,12 @@ const { getAllProducts, getProductById } = require('../controller/productControl
 //@desc GET all products from Db
 //@route GET /api/productsData
 //@access Puclic
-router.get('/',getAllProducts)
+router.get('/', getAllProducts)
 
 //@desc Get a product by id from Db
 //@route GET /api/products/:id
 //@access Public
 
-router.get(':/id',  getProductById)
+router.get('/:id', getProductById)
 
 module.exports = router;

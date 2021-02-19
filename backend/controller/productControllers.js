@@ -12,7 +12,7 @@ const getAllProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
   try {
-    const product = Product.findById(req.param.id);
+    const product = await Product.findById(req.params.id);
     res.json(product);
   }
   catch (error) {
@@ -20,7 +20,7 @@ const getProductById = async (req, res) => {
   }
 }
 
-module.exports =  {
+module.exports = {
   getAllProducts,
   getProductById,
 }
